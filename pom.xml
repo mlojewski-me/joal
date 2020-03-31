@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.araymond.joal</groupId>
-    <artifactId>jack-of-all-trades</artifactId>
-    <version>2.1.20</version>
+    <artifactId>joal-mlojewski-me</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>jack-of-all-trades</name>

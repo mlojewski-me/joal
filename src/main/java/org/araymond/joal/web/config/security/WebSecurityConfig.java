@@ -13,14 +13,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @ConditionalOnWebUi
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final String pathPrefix;
     private final boolean shouldDisableFrameOptions;
 
     public WebSecurityConfig(
-            @Value("${joal.ui.path.prefix}") final String pathPrefix,
             @Value("${joal.iframe.enabled:false}") final boolean shouldDisableFrameOptions
     ) {
-        this.pathPrefix = pathPrefix;
         this.shouldDisableFrameOptions = shouldDisableFrameOptions;
     }
 
@@ -31,11 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
         http
                 .httpBasic().disable()
+                .requiresChannel().anyRequest().requiresSecure().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .antMatchers("/" + this.pathPrefix).permitAll()
-                .antMatchers("/" + this.pathPrefix + "/ui/**").permitAll()
-                .anyRequest().denyAll();
+                .authorizeRequests().anyRequest().permitAll();
     }
 
 }

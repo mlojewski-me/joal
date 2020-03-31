@@ -15,8 +15,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        if (!registry.hasMappingForPattern("/ui/**")) {
-            registry.addResourceHandler("/ui/**")
+        if (!registry.hasMappingForPattern("/**")) {
+            registry.addResourceHandler("/**")
                     .addResourceLocations(RESOURCE_LOCATIONS);
         }
     }
@@ -24,8 +24,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(final ViewControllerRegistry registry) {
         // The webui passes the credentials alongs with ui call, redirect them as well
-        registry.addRedirectViewController("/ui", "ui/").setKeepQueryParams(true);
-        registry.addViewController("/ui/").setViewName("forward:index.html");
+        registry.addViewController("/").setViewName("forward:index.html");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         //super.addViewControllers(registry);
     }
